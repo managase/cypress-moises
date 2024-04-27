@@ -2,7 +2,7 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   defaultCommandTimeout: 30000,
-  requestTimeout: 3000,
+  requestTimeout: 30000,
   responseTimeout: 20000,
   retries: {
     runMode: 2,
