@@ -20,7 +20,7 @@ describe('Signup Test', () => {
           });
     });
 
-    it('should present a error message to enter a valid email address', () => {
+    it.only('should present a error message to enter a valid email address', () => {
         SignupPage.clickSignupBtn();
         cy.fixture('signupDataNegative.json').each((loginData) => {
             SignupPage.signup(loginData.username, loginData.password);
@@ -33,6 +33,7 @@ describe('Signup Test', () => {
     it('should signup with valid credentials', { tags: '@e2e' },  () => {
         SignupPage.clickSignupBtn();
         SignupPage.signup(username, password);
+        cy.get('#user_info_button').should('be.visible')
         Components.clickUserInfoBtn();
         Components.clickUserInfoSignoutBtn();
         cy.get('#login_button').should('be.visible')

@@ -22,7 +22,6 @@ class SignupPage {
         this.elements.passwordInput().type(password);
         this.elements.signupDownBtn().as('btnSignupDown').should('be.visible')
         cy.get('@btnSignupDown').click();
-        cy.get('#user_info_button').should('be.visible')
     }
 
     clearFields() {
