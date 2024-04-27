@@ -20,7 +20,7 @@ describe('Signup Test', () => {
           });
     });
 
-    it.only('should present a error message to enter a valid email address', () => {
+    it('should present a error message to enter a valid email address', () => {
         SignupPage.clickSignupBtn();
         cy.fixture('signupDataNegative.json').each((loginData) => {
             SignupPage.signup(loginData.username, loginData.password);

@@ -1,7 +1,7 @@
-// cypress/e2e/signup.cy.js
+// cypress/e2e/collection.cy.js
 
-const LoginPage = require('../support/page_objects/loginPageMoises');
-const Components = require('../support/page_objects/componentsMoises');
+const LoginPage = require('../support/page_objects/loginPage');
+const Components = require('../support/page_objects/components');
 
 describe('Collection Test', () => {
 

@@ -3,15 +3,14 @@
       "username": "user#$",
       "password": "senha_invalida",
       "errorMessage": "Please enter a valid email address"
-
     },
     {
-        "username": "abc@qatest.com",
+        "username": "testing_random3@qatest.com",
         "password": "pass",
         "errorMessage": "At least 6 characters long"
     },
     {
-      "username": "abc@qatest.com",
+      "username": "testing_random4@qatest.com",
       "password": "senha_invalida",
       "errorMessage": "The email address is already in use by another account."
     }
