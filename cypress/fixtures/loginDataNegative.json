@@ -1,0 +1,18 @@
+[
+    {
+      "username": "user#$",
+      "password": "invalid_password",
+      "errorMessage": "Please enter a valid email address"
+    },
+    {
+        "username": "testing_random1@qatest.com",
+        "password": "pass",
+        "errorMessage": "Wrong Email/Password combination"
+    },
+    {
+      "username": "testing_random2@qatest.com",
+      "password": "invalid_password",
+      "errorMessage": "Wrong Email/Password combination"
+    }
+]
+  
