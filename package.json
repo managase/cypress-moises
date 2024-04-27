@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "tests-signup": "cypress run  --env grepTags=@e2e --spec 'cypress/e2e/signup.cy.js'",
+    "tests-login": "cypress run --spec 'cypress/e2e/login.cy.js'",
+    "tests-tracks": "cypress run --env grepTags=@e2e --spec 'cypress/e2e/separateTracks.cy.js'",
+    "tests-collection": "cypress run --env grepTags=@e2e --spec 'cypress/e2e/collection.cy.js'",
+    "execute-e2e-tests": "npm run tests-signup && npm run tests-tracks && npm run tests-collection"
+  },
   "devDependencies": {
     "@bahmutov/cy-grep": "^1.9.17",
     "@faker-js/faker": "^8.4.1",
