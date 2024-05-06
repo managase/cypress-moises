@@ -6,22 +6,24 @@ const Components = require('../support/page_objects/components');
 describe('Login Test', () => {
 
     beforeEach(() => {
-            LoginPage.visit();
+        cy.clearCookies();
+        cy.clearLocalStorage()
+        cy.reload();
+        LoginPage.visit();
       });
 
     it('should present a error message to enter a valid email address', () => {
         cy.fixture('loginDataNegative.json').each((loginData) => {
             LoginPage.login(loginData.username, loginData.password);
-                cy.get('.email-password-sign-in_labelError___Bgrm').as('labelError').should('be.visible')
-                cy.get('@labelError').contains(loginData.errorMessage);
+            LoginPage.validateLoginLabelError(loginData.errorMessage);    
             LoginPage.clearFields();
-        })
+        });
     });
 
     it('should login with valid credentials', () => {      
-        const username = Cypress.env('username')
-        const password = Cypress.env('password')
-        LoginPage.login(username, password);
-        Components.clickMoisesLogo();
+        cy.fixture('login.json').then((loginData) => {
+            LoginPage.login(loginData.username, loginData.password);
+            Components.validateUserInfoBtn();
+        });
     });
 });

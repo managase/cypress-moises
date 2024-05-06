@@ -5,7 +5,8 @@ class SeparateTracksPage {
         newBtn: () => cy.get("#add_new_song_button"),
         addBtn: () => cy.get("#empty_state_add_button"),
         uploadBtn: () => cy.get("#upload_from_computer_tab"),
-        selectFileContent: () => cy.get(".select-local-file_dropzone__48wgh"),
+        selectFileDropzone: () => cy.get(".select-local-file_dropzone__48wgh"),
+        selectFileContainer: () => cy.get('.select-local-file_container___iOmG'),
         nextBtn: () => cy.get('#upload_next_button'),
         vocalsDrumsList: () => cy.get('#vocals-drums-bass-other'),
         previousBtn: () => cy.get('#upload_previous_button'),
@@ -30,12 +31,18 @@ class SeparateTracksPage {
     }
 
     clickSelectFile() {
-        this.elements.selectFileContent().as('content').should('be.visible')
-        cy.get('@content').click();
+        this.elements.selectFileDropzone().as('dropzone').should('be.visible')
+        cy.get('@dropzone').click();
     }
 
     addTracks(filename) {
-        cy.get(".select-local-file_dropzone__48wgh").selectFile(filename, {action: "drag-drop"});
+        this.elements.selectFileDropzone().as('dropzone')
+        cy.get('@dropzone').selectFile(filename, {action: "drag-drop"});
+    }
+
+    validateInvalidFileError(errorMessage) {
+        this.elements.selectFileContainer().as('container')
+        cy.get('@container').should('be.visible').contains(errorMessage);
     }
 
     clickNextButton() {
@@ -52,6 +59,12 @@ class SeparateTracksPage {
         this.elements.submitBtn().as('btnSubmit').should('be.visible')
         cy.get('@btnSubmit').click();
     }
+    
+    validateUploadSong(trackName) {
+        cy.get('[title="' + trackName + '"]')
+        .should('be.visible')
+        .contains(trackName);
+    }
 
     clickTaskActionBtn_1() {
         this.elements.taskActionBtn_1().click( {force: true} );
@@ -65,6 +78,10 @@ class SeparateTracksPage {
     clickDeleteSong() {
         this.elements.deleteSongBtn().as('BtnDeleteSong').should('be.visible')
         cy.get('@BtnDeleteSong').click( {force: true} );
+    }
+
+    validateDeleteSong(trackName) {
+        cy.get('[title="' + trackName + '"]').should('not.exist');
     }
 }
 

@@ -5,6 +5,8 @@ class LoginPage {
         emailInput: () => cy.get("#email_address_textbox"),
         passwordInput: () => cy.get("#password_textbox"),
         loginBtn: () => cy.get("#login_button"),
+        loginLabelError: () => cy.get('.email-password-sign-in_labelError___Bgrm'),
+        //userInfoBtn: () => cy.get('#user_info_button'),
     }
 
     visit() {
@@ -18,6 +20,21 @@ class LoginPage {
         cy.get('@btnLogin').click();
     }
 
+    validateLoginBtn() {
+        this.elements.loginBtn().as('btnLogin')
+        cy.get('@btnLogin').should('be.visible')
+    }
+
+    validateLoginLabelError(errorMessage) {
+        this.elements.loginLabelError().as('labelError')
+        cy.get('@labelError').should('be.visible').contains(errorMessage);
+    }
+/*
+    validateUserInfoBtn() {
+        this.elements.userInfoBtn().as('btnUserInfo')
+        cy.get('@btnUserInfo').should('be.visible')
+    }
+*/
     clearFields() {
         this.elements.emailInput().clear();
         this.elements.passwordInput().clear();

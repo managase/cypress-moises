@@ -5,7 +5,8 @@ class SignupPage {
         emailInput: () => cy.get("#email_address_textbox"),
         passwordInput: () => cy.get("#password_textbox"),
         signupUpBtn: () => cy.get("#sign_up_button"),
-        signupDownBtn: () => cy.get("#signup_button")
+        signupDownBtn: () => cy.get("#signup_button"),
+        loginLabelError: () => cy.get('.email-password-sign-in_labelError___Bgrm'),
     }
 
     visit() {
@@ -24,9 +25,26 @@ class SignupPage {
         cy.get('@btnSignupDown').click();
     }
 
+    validateLoginBtn() {
+        this.elements.loginBtn().as('btnLogin')
+        cy.get('@btnLogin').should('be.visible')
+    }
+
+    validateLoginLabelError(errorMessage) {
+        this.elements.loginLabelError().as('labelError')
+        cy.get('@labelError').should('be.visible').contains(errorMessage);
+    }
+
     clearFields() {
         this.elements.emailInput().clear();
         this.elements.passwordInput().clear();
+    }
+
+    saveSignupUserFile(username, password) {
+        cy.writeFile('cypress/fixtures/login.json', { 
+            "username": username,
+            "password": password
+        });
     }
 }
 

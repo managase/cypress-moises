@@ -8,6 +8,7 @@ module.exports = defineConfig({
     runMode: 2,
     openMode: 2,
   },
+  chromeWebSecurity: false,
   e2e: {
     baseUrl: 'https://studio.moises.ai',
     setupNodeEvents(on, config) {
