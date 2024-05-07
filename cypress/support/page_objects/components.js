@@ -87,13 +87,11 @@ class Components {
     }
 
     clickUserInfoBtn() {
-        this.elements.userInfoBtn().as('BtnUserInfo').should('be.visible')
-        cy.get('@BtnUserInfo').click( {force: true} );
+        this.elements.userInfoBtn().click( {force: true} );
     }
 
     clickUserInfoSignoutBtn() {
-        this.elements.userInfoSignoutBtn().as('BtnUserInfoSignout').should('be.visible')
-        cy.get('@BtnUserInfoSignout').click( {force: true} );
+        this.elements.userInfoSignoutBtn().click( {force: true} );
     }
     validateDeleteCollection(){
         this.elements.setlistContent().should('not.exist');

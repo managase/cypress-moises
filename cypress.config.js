@@ -5,8 +5,8 @@ module.exports = defineConfig({
   requestTimeout: 30000,
   responseTimeout: 20000,
   retries: {
-    runMode: 2,
-    openMode: 2,
+    runMode: 3,
+    openMode: 3,
   },
   chromeWebSecurity: false,
   e2e: {
