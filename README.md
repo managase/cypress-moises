@@ -7,7 +7,7 @@ I decided to use Cypress due to its well-suited for end-to-end testing of web ap
 The tests scripts was created based in a architeture by modules and using pageobjects to maintain the specific components of the funcionality and their actions
 - [signup.cy.js] Tests related to the signup functionality
 - [login.cy.js] Tests related to the login functionality
-- [separateTacks.cy.js] Tests related to add, delete tracks
+- [tracks.cy.js] Tests related to add, delete tracks
 - [collection.cy.js] Tests related to the collection manage
 
 Pageobjects were created in `support/page_objects` folder
@@ -37,19 +37,21 @@ To install the dev dependencies, run `npm install` (or `npm i` for short.)
 - [cypress.config.js] configuration of defaultCommandTimeout, requestTimeout, responseTimeout, retries, baseUrl, plugins
 - [cypress.env.json] configuration file to store data to create a new account and run the e2e tests 
 
-**Note:** The `cypress.env.json` file is not tracked by git since it's listed in the `.gitignore` file.
+**Note:** The `login.json` file is not tracked by git since it's listed in the `.gitignore` file.
 
 ## Running the tests
 
-In this project, you can run tests in interactive and headless modes, both on desktop and tablet viewports.
+In this project, you can run tests in interactive and headless modes.
+
+### Interactive mode
+- Run `npx cypress open` to run individually signup tests.
 
 ### Headless mode
-
-Run `npm run tests-signup` to run individually signup tests.
-Run `npm run tests-login` to run individually login tests.
-Run `npm run tests-tracks` to run individually tests to manage tracks.
-Run `npm run tests-collection` to run individually collection tests.
-Run `npm run execute-e2e-tests` to run e2t tests categorized by tag `@e2e`.
+- Run `npm run tests-signup` to run individually signup tests.
+- Run `npm run tests-login` to run individually login tests.
+- Run `npm run tests-tracks` to run individually tests to manage tracks.
+- Run `npm run tests-collection` to run individually collection tests.
+- Run `npm run execute-e2e-tests` to run e2e tests categorized by tag `@e2e`.
 
 ### Test Retries
 
@@ -62,6 +64,8 @@ https://github.com/cypress-io/cypress/issues/27501
 https://github.com/cypress-io/cypress/issues/25891
 https://github.com/cypress-io/cypress/issues/28285
 
-- I found some issues related to user session management during test creation. For instance, during test execution, the user was not authenticated in the application but was logged in with a session from a previously user. To address this, a strategy used was executing a log off during tests to prevent application caching and to utilize a configuration file for storing the username and password `cypress.env.json`.
+I verified that the issue was related to accessing the cypress.env.json file at the root of the project using the cy.writeFile command. I changed the logic to store the username and password in the login.json file in the fixtures directory. Loop issue was fixed.
+
+- I found some issues related to user session management during test creation. For instance, during test execution, the user was not authenticated in the application but was logged in with a session from a previously user. To address this, a strategy used was executing a log off during tests to prevent application caching and to utilize a configuration file for storing the username and password `cypress/fixtures/login.json`.
 
 - During the execution the test to delete the collection using cypress in Open Mode (npx cypress open), another browser instance is open help.moises.ai - Confirme que você é humano realizando a ação abaixo.
