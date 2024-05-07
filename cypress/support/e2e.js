@@ -15,8 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import { faker } from '@faker-js/faker';
-
 const registerCypressGrep = require('@bahmutov/cy-grep')
 registerCypressGrep()
 
