@@ -71,4 +71,35 @@ describe('Tracks Test', () => {
             TracksPage.validateDeleteSong();
         });
     });
+
+    it('should validate the input value of the request after the track separation process', { tags: '@e2e' }, () => {
+        TracksPage.clickAddButton();
+        TracksPage.clickUploadButton();
+        cy.fixture('tracks.json').then((tracksData) => {
+            const tracks = tracksData.name + '.' + tracksData.format;
+            TracksPage.addTracks('cypress/fixtures/' + tracks);
+            TracksPage.clickNextButton();
+            TracksPage.clickSeparationType();
+            let graphqlRequests = [];
+            cy.intercept('POST', 'https://api.moises.ai/graphql', (req) => {
+                if (req.body.query.includes("createTask")) {
+                    graphqlRequests.push(req);
+                }
+            }).as('graphqlRequests');
+            TracksPage.clickSubmitButton();
+            cy.wait('@graphqlRequests').then(() => {
+                const filteredGraphqlRequests = graphqlRequests[0].body.query;
+                const regex = /input:\s*\"([^\"]+)\"/;
+                const match = regex.exec(filteredGraphqlRequests);
+                if (match && match.length > 1) {
+                    const inputValue = match[1];
+                    expect(inputValue).to.equal(tracks);
+                  } else {
+                    console.log("Input value not found");
+                }
+            });
+            Components.clickMoisesLogo();
+            TracksPage.validateUploadSong(tracksData.name); 
+        });
+    });
 });
