@@ -66,6 +66,6 @@ https://github.com/cypress-io/cypress/issues/28285
 
 I verified that the issue was related to accessing the cypress.env.json file at the root of the project using the cy.writeFile command. I changed the logic to store the username and password in the login.json file in the fixtures directory. Loop issue was fixed.
 
-- I found some issues related to user session management during test creation. For instance, during test execution, the user was not authenticated in the application but was logged in with a session from a previously user. To address this, a strategy used was executing a log off during tests to prevent application caching and to utilize a configuration file for storing the username and password `cypress/fixtures/    login.json`.
+- I found some issues related to user session management during test creation. For instance, during test execution, the user was not authenticated in the application but was logged in with a session from a previously user. To address this, a strategy used was executing a log off during tests to prevent application caching and to utilize a configuration file for storing the username and password `cypress/fixtures/login.json`.
 
 - During the execution the test to delete the collection using cypress in Open Mode (npx cypress open), another browser instance is open help.moises.ai - Confirme que você é humano realizando a ação abaixo.
