@@ -88,14 +88,13 @@ describe('Tracks Test', () => {
             }).as('graphqlRequests');
             TracksPage.clickSubmitButton();
             cy.wait('@graphqlRequests').then(() => {
-                const filteredGraphqlRequests = graphqlRequests[0].body.query;
-                const regex = /input:\s*\"([^\"]+)\"/;
-                const match = regex.exec(filteredGraphqlRequests);
-                if (match && match.length > 1) {
-                    const inputValue = match[1];
+                if (graphqlRequests && graphqlRequests.length > 0) {
+                    const body = graphqlRequests[0].body;
+
+                    const inputValue = body.query.match(/input:\s*"([^"]+)"/)[1];
                     expect(inputValue).to.equal(tracks);
-                  } else {
-                    console.log("Input value not found");
+                } else {
+                    console.error("No GraphQL request captured");
                 }
             });
             Components.clickMoisesLogo();
